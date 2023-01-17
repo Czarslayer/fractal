@@ -6,7 +6,7 @@
 /*   By: mabahani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 17:04:04 by mabahani          #+#    #+#             */
-/*   Updated: 2023/01/16 14:02:31 by mabahani         ###   ########.fr       */
+/*   Updated: 2023/01/16 23:20:10 by mabahani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,17 @@ int draw(t_control *cont)
 
 int key_hook(int keycode, t_control *cont)
 {
+    cont->movesrc = 0.1 / (cont->zoom);
     if (keycode == 53)
         exit(0);
     if (keycode == 123)
-        cont->move_x -= 0.1;
+        cont->move_x -= cont->movesrc;
     if (keycode == 124)
-        cont->move_x += 0.1;
+        cont->move_x += cont->movesrc;
     if (keycode == 125)
-        cont->move_y += 0.1;
+        cont->move_y += cont->movesrc;
     if (keycode == 126)
-        cont->move_y -= 0.1;
+        cont->move_y -= cont->movesrc;
         printf("cont->move_x = %f: cont->move_y = %f: cont->zoom %f\n", cont->move_x, cont->move_y, cont->zoom_src);
     return (0);
 }
@@ -109,7 +110,7 @@ int	main(void)
     cont.move_x = 0;
     cont.move_y = 0;
     cont.zoom = 1;
-    cont.zoom_src = 2 * (cont.zoom / 10);
+   // cont.zoom_src = 2 * (cont.zoom / 10);
     cont.window->mlx = mlx_init();
     cont.window->mlx_win = mlx_new_window(cont.window->mlx, WIDTH, HEIGHT, "fractal baby");
     cont.img->img = mlx_new_image(cont.window->mlx, WIDTH, HEIGHT);

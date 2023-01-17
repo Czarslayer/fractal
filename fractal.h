@@ -6,7 +6,7 @@
 /*   By: mabahani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 17:04:02 by mabahani          #+#    #+#             */
-/*   Updated: 2023/01/15 22:24:18 by mabahani         ###   ########.fr       */
+/*   Updated: 2023/01/16 23:14:14 by mabahani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,8 @@ typedef struct	s_data {
 typedef struct s_control
 {
     double move_x;
-    double move_x_src;
+    double movesrc;
     double move_y;
-    double move_y_src;
     double zoom;
     double zoom_src;
     t_data *img;
