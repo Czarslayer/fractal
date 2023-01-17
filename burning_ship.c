@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   burning_ship.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mabahani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 17:04:04 by mabahani          #+#    #+#             */
-/*   Updated: 2023/01/17 14:32:27 by mabahani         ###   ########.fr       */
+/*   Updated: 2023/01/17 14:33:07 by mabahani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void mandelbrot_drawer(t_control *cont, int x, int y)
     {
         double tmp = z.real;
         z.real = z.real * z.real - z.imag * z.imag + c.real;
-        z.imag = 2 * z.imag * tmp + c.imag;
+        z.imag = fabs(2 * z.imag * tmp) + c.imag;
         iter++;
     }
     if (iter == MAX_ITER)
