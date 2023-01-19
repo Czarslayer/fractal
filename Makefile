@@ -3,7 +3,13 @@ NAME = fractal
 
 FLAGS = -Wall -Wextra -Werror
 
-SRC = totest.c
+SRC = mandelbrot.c \
+	  julia.c \
+	  burning_ship.c \
+	  tools.c \
+	  main.c\
+
+SRC_LIBFT = ./libft/libft.a
 
 OBJ = $(SRC:.c=.o)
 
@@ -11,7 +17,7 @@ OBJ = $(SRC:.c=.o)
 	$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	$(CC) $(OBJ) $(SRC_LIBFT) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 all: $(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: mabahani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 17:04:02 by mabahani          #+#    #+#             */
-/*   Updated: 2023/01/16 23:14:14 by mabahani         ###   ########.fr       */
+/*   Updated: 2023/01/19 00:11:31 by mabahani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <unistd.h>
 # define WIDTH 1000
 # define HEIGHT 1000
-# define MAX_ITER 60
+# define MAX_ITER 100
 
 typedef struct l_window
 {
@@ -45,6 +45,9 @@ typedef struct s_control
     double zoom_src;
     t_data *img;
     t_window *window;
+
+    double rfix;
+    double ifix;
 } t_control;
 
 typedef struct t_complexe
@@ -54,5 +57,12 @@ typedef struct t_complexe
 } t_complexe;
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+int key_hook(int keycode, t_control *cont);
+int mouse_hook(int button, int x, int y, t_control *cont);
+
+void	mandelbrot(void);
+void	julia(void);
+void	burning_ship(void);
+
 
 #endif

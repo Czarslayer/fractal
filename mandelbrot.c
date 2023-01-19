@@ -6,20 +6,33 @@
 /*   By: mabahani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 17:04:04 by mabahani          #+#    #+#             */
-/*   Updated: 2023/01/17 14:32:27 by mabahani         ###   ########.fr       */
+/*   Updated: 2023/01/19 01:37:08 by mabahani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "fractal.h"
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-{
-	char	*dst;
+// just an idea for the coloring
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
-}
+// int32_t	fade(uint32_t step, uint32_t max_iter)
+// {
+// 	const int32_t	table[] = {
+// 		0x559597, 0xd0e1b8, 0x9c9b86, 0x87c9ac, 0x44444c
+// 	};
+
+// 	if (step == max_iter)
+// 		return (0x000);
+// 	return (table[step % 5]);
+// }
+
+// me : can you make a function that takes a step and a max_iter and returns a silver color
+// me : like a gradient
+// me : from bleu to silverblue
+// me : with a silver color in the middle
+// you : sure
+// me : thanks
+// you : here you go
 
 void mandelbrot_drawer(t_control *cont, int x, int y)
 {
@@ -28,8 +41,8 @@ void mandelbrot_drawer(t_control *cont, int x, int y)
     t_complexe z;
     z.imag = 0;
     z.real = 0;
-    c.real = (x - WIDTH / 2) / (0.5 * WIDTH * cont->zoom) + cont->move_x;
-    c.imag = (y - HEIGHT / 2) / (0.5 * HEIGHT * cont->zoom) + cont->move_y;
+    c.real = (x - WIDTH / 2) / (0.5 * WIDTH * cont->zoom) + cont->move_x ;
+    c.imag = (y - HEIGHT / 2) / (0.5 * HEIGHT * cont->zoom) + cont->move_y ;
     while (z.real * z.real + z.imag * z.imag < 4 && iter < MAX_ITER)
     {
         double tmp = z.real;
@@ -38,13 +51,13 @@ void mandelbrot_drawer(t_control *cont, int x, int y)
         iter++;
     }
     if (iter == MAX_ITER)
-        my_mlx_pixel_put(cont->img, x, y, 0x000000);
+       my_mlx_pixel_put(cont->img, x, y, 0x000000);
     else
-        my_mlx_pixel_put(cont->img, x, y, 265 * iter);
+        my_mlx_pixel_put(cont->img, x, y, 0xff3a00 * iter);
 }
 
 
-int draw(t_control *cont)
+int draw_mandelbrot(t_control *cont)
 {
     int i;
     int j;
@@ -65,47 +78,16 @@ int draw(t_control *cont)
     return (0);
 }
 
-int key_hook(int keycode, t_control *cont)
-{
-    cont->movesrc = 0.1 / (cont->zoom);
-    if (keycode == 53)
-        exit(0);
-    if (keycode == 123)
-        cont->move_x -= cont->movesrc;
-    if (keycode == 124)
-        cont->move_x += cont->movesrc;
-    if (keycode == 125)
-        cont->move_y += cont->movesrc;
-    if (keycode == 126)
-        cont->move_y -= cont->movesrc;
-        printf("cont->move_x = %f: cont->move_y = %f: cont->zoom %f\n", cont->move_x, cont->move_y, cont->zoom_src);
-    return (0);
-}
 
-int mouse_hook(int button, int x, int y, t_control *cont)
+void	mandelbrot(void)
 {
-    cont->zoom_src = 2 * (cont->zoom / 10);
-    if (button == 4)
-        cont->zoom += cont->zoom_src;
-    if (button == 5)
-        cont->zoom -= cont->zoom_src;
-    if(button == 3)
-        cont->zoom = 1;
-    return (0);
-}
-
-int	main(void)
-{
-	void	*mlx;
-	void	*mlx_win;
 	t_control	cont;
 
     cont.window = malloc(sizeof(t_window));
     cont.img = malloc(sizeof(t_data));
     cont.move_x = 0;
     cont.move_y = 0;
-    cont.zoom = 1;
-   // cont.zoom_src = 2 * (cont.zoom / 10);
+    cont.zoom = 0.5;
     cont.window->mlx = mlx_init();
     cont.window->mlx_win = mlx_new_window(cont.window->mlx, WIDTH, HEIGHT, "fractal baby");
     cont.img->img = mlx_new_image(cont.window->mlx, WIDTH, HEIGHT);
@@ -113,6 +95,6 @@ int	main(void)
                                 &cont.img->endian);
     mlx_key_hook(cont.window->mlx_win, key_hook, &cont);
     mlx_mouse_hook(cont.window->mlx_win, mouse_hook, &cont);
-    mlx_loop_hook(cont.window->mlx, draw, &cont);
+    mlx_loop_hook(cont.window->mlx, draw_mandelbrot, &cont);
     mlx_loop(cont.window->mlx);
 }
