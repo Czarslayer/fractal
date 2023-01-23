@@ -1,7 +1,7 @@
 
 NAME = fractal
 
-FLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
 SRC = mandelbrot.c \
 	  julia.c \
@@ -22,10 +22,11 @@ END = \033[0m
 #.SILENT:
 OBJ = $(SRC:.c=.o)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ)	
 	@echo "${GREEN}compiling fractal program...${END}"
-	$(CC) $(OBJ) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 	@echo "${GREEN}fractal program compiled!${END}"
+	clear
 	@echo "${CYAN}====================================================================================================${END}"
 	@echo "${DARKBLUE}/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\ ${END}"
 	@echo "${CYAN}====================================================================================================${END}"
@@ -38,15 +39,17 @@ $(NAME): $(OBJ)
 	@echo "${CYAN}====================================================================================================${END}"
 	@echo "${DARKBLUE}/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\ ${END}"
 	@echo "${CYAN}====================================================================================================${END}"
-
+	@echo
 	@echo "   ${DARKBLUE}HELLO THERE,${YELLOW} welcome to my fractal program${END}"
 	@echo "                ${YELLOW}you can choose between mandelbrot, julia and burningship${END}"
 	@echo "                ${YELLOW}you can also zoom in and out with the ${WHITE}[mouse wheel]${END}"
 	@echo "                ${YELLOW}and move around with the arrow keys ${WHITE}[left]${END} ${WHITE}[right]${END} ${WHITE}[up]${END} ${WHITE}[down]${END}"
 	@echo "                ${YELLOW}if you want to go back to original zoom, press${WHITE} [the wheel]${END}"
+	@echo
 	@echo "                    =========================================="
 	@echo "                    || ${CYAN}how to use: ${RED}./fractol [fractal name] ${END}||"
 	@echo "                    =========================================="
+	@echo
 
 
 all: $(NAME)

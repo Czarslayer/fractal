@@ -6,7 +6,7 @@
 /*   By: mabahani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 17:04:02 by mabahani          #+#    #+#             */
-/*   Updated: 2023/01/23 17:07:56 by mabahani         ###   ########.fr       */
+/*   Updated: 2023/01/23 19:10:11 by mabahani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# define WIDTH 600
-# define HEIGHT 600
+# define WIDTH 600.0
+# define HEIGHT 600.0
 # define MAX_ITER 60
 
 typedef struct l_window
@@ -43,7 +43,7 @@ typedef struct s_control
 	double		move_y;
 	double		zoom;
 	double		zoom_src;
-    double      color;
+	double		color;
 	t_data		*img;
 	t_window	*window;
 
@@ -68,7 +68,6 @@ void	julia(t_control	cont);
 void	burning_ship(t_control	cont);
 
 void	ft_putstr_fd(char *s, int fd);
-int     ft_strncmp(const char *s1, const char *s2, size_t n);
-
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 #endif

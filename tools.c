@@ -6,7 +6,7 @@
 /*   By: mabahani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 23:44:22 by mabahani          #+#    #+#             */
-/*   Updated: 2023/01/23 17:08:17 by mabahani         ###   ########.fr       */
+/*   Updated: 2023/01/23 19:24:58 by mabahani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,14 @@ int	key_hook(int keycode, t_control *cont)
 	cont->movesrc = 0.1 / (cont->zoom);
 	if (keycode == 53)
 		exit(0);
+	if (keycode == 38)
+		cont->color = 265 * 256 * 256;
+	if (keycode == 40)
+		cont->color = 0xff3a00;
+	if (keycode == 37)
+		cont->color = 0x7CFC00;
+	if (keycode == 4)
+		cont->color = 256;
 	if (keycode == 123)
 		cont->move_x -= cont->movesrc;
 	if (keycode == 124)

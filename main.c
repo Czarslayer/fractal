@@ -6,7 +6,7 @@
 /*   By: mabahani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 00:02:32 by mabahani          #+#    #+#             */
-/*   Updated: 2023/01/23 17:06:09 by mabahani         ###   ########.fr       */
+/*   Updated: 2023/01/23 18:51:59 by mabahani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,20 @@
 
 void	print_error(int f)
 {
-    if (f == 1)
-    {
-        ft_putstr_fd("\e[1;31mERROR: invalid fractal name\e[0m\n", 2);
-        ft_putstr_fd("\e[4;33mfractal: mandelbrot, julia, burningship\e[0m\n", 2);
-    }
-    else if (f == 0)
-    {
-        ft_putstr_fd("\e[1;31mERROR: invalid number of arguments\e[0m\n", 2);
-        ft_putstr_fd("\e[4;33mfractal:./fractal mandelbrot, julia, burningship\e[0m\n", 2);
-        ft_putstr_fd("\e[4;33mjulia params:./fractal julia 'real' 'imaginary'\e[0m\n", 2);
-    }
-    exit(0);
+	if (f == 1)
+	{
+		ft_putstr_fd("\e[1;31mERROR: invalid fractal name\e[0m\n", 2);
+		ft_putstr_fd("\e[4;33mfractal: mandelbrot, julia, burningship\e[0m\n", 2);
+	}
+	else if (f == 0)
+	{
+		ft_putstr_fd("\e[1;31mERROR: invalid number of arguments\e[0m\n", 2);
+		ft_putstr_fd("\e[4;33mfractal:./fractal \
+		mandelbrot, julia, burningship\e[0m\n", 2);
+		ft_putstr_fd("\e[4;33mjulia params:./fractal julia \
+		'real' 'imaginary'\e[0m\n", 2);
+	}
+	exit(0);
 }
 
 void	handle_fractal_1(t_control *cont, char **av)
@@ -72,12 +74,11 @@ int	main(int ac, char **av)
 	cont.move_x = 0;
 	cont.move_y = 0;
 	cont.zoom = 0.5;
-    cont.color = 1;
+	cont.color = 256 * 256 * 265;
 	if (ac == 2)
 		handle_fractal_1(&cont, av);
 	else if (ac == 4)
 		handle_fractal_2(&cont, av);
 	else
 		print_error(0);
-    
 }

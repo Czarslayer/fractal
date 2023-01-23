@@ -6,7 +6,7 @@
 /*   By: mabahani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 17:04:04 by mabahani          #+#    #+#             */
-/*   Updated: 2023/01/21 15:32:37 by mabahani         ###   ########.fr       */
+/*   Updated: 2023/01/23 18:55:23 by mabahani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ void	burningship_drawer(t_control *cont, int x, int y)
 	iter = 0;
 	z.imag = 0;
 	z.real = 0;
-	c.real = (x - WIDTH / 2) / ((WIDTH / 2) * cont->zoom) + cont->move_x;
-	c.imag = (y - HEIGHT / 2) / ((HEIGHT / 2) * cont->zoom) + cont->move_y;
+	c.real = (x - (WIDTH * 0.5)) / ((WIDTH * 0.5) * cont->zoom) + cont->move_x;
+	c.imag = (y - (HEIGHT * 0.5)) / ((HEIGHT * 0.5) * cont->zoom) \
+	+ cont->move_y;
 	while (z.real * z.real + z.imag * z.imag < 4 && iter < MAX_ITER)
 	{
 		tmp = z.real;
@@ -34,7 +35,7 @@ void	burningship_drawer(t_control *cont, int x, int y)
 	if (iter == MAX_ITER)
 		my_mlx_pixel_put(cont->img, x, y, 0x000000);
 	else
-		my_mlx_pixel_put(cont->img, x, y, 256 * 256 * 265 * iter);
+		my_mlx_pixel_put(cont->img, x, y, iter * cont->color);
 }
 
 int	draw_burningship(t_control *cont)

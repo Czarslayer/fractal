@@ -6,7 +6,7 @@
 /*   By: mabahani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 17:04:04 by mabahani          #+#    #+#             */
-/*   Updated: 2023/01/23 15:10:06 by mabahani         ###   ########.fr       */
+/*   Updated: 2023/01/23 19:22:05 by mabahani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ void	julia_drawer(t_control *cont, int x, int y)
 	iter = 0;
 	c.imag = cont->ifix;
 	c.real = cont->rfix;
-	z.real = (x - WIDTH / 2) / (0.5 * WIDTH * cont->zoom) + cont->move_x;
-	z.imag = (y - HEIGHT / 2) / (0.5 * HEIGHT * cont->zoom) + cont->move_y;
+	z.real = (x - (WIDTH * 0.5)) / ((WIDTH * 0.5) * cont->zoom) + cont->move_x;
+	z.imag = (y - (HEIGHT * 0.5)) / ((HEIGHT * 0.5) * cont->zoom) \
+	+ cont->move_y;
 	while (z.real * z.real + z.imag * z.imag < 4 && iter < MAX_ITER)
 	{
 		tmp = z.real;
@@ -34,7 +35,7 @@ void	julia_drawer(t_control *cont, int x, int y)
 	if (iter == MAX_ITER)
 		my_mlx_pixel_put(cont->img, x, y, 0x000000);
 	else
-		my_mlx_pixel_put(cont->img, x, y, iter * 265 * 256 * 256);
+		my_mlx_pixel_put(cont->img, x, y, iter * cont->color);
 }
 
 int	draw_julia(t_control *cont)
