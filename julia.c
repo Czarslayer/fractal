@@ -6,7 +6,7 @@
 /*   By: mabahani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 17:04:04 by mabahani          #+#    #+#             */
-/*   Updated: 2023/01/23 19:22:05 by mabahani         ###   ########.fr       */
+/*   Updated: 2023/01/23 23:16:10 by mabahani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	julia_drawer(t_control *cont, int x, int y)
 	z.real = (x - (WIDTH * 0.5)) / ((WIDTH * 0.5) * cont->zoom) + cont->move_x;
 	z.imag = (y - (HEIGHT * 0.5)) / ((HEIGHT * 0.5) * cont->zoom) \
 	+ cont->move_y;
+	z.imag *= -1;
 	while (z.real * z.real + z.imag * z.imag < 4 && iter < MAX_ITER)
 	{
 		tmp = z.real;
@@ -73,9 +74,9 @@ int	mouse_move(int x, int y, t_control *cont)
 
 void	julia(t_control	cont)
 {
-	mlx_key_hook(cont.window->mlx_win, key_hook, &cont);
+	mlx_hook(cont.window->mlx_win, 2, 0, key_hook, &cont);
 	mlx_mouse_hook(cont.window->mlx_win, mouse_hook, &cont);
-	mlx_hook(cont.window->mlx_win, 6, 1L << 2, mouse_move, &cont);
+	mlx_hook(cont.window->mlx_win, 6, 0, mouse_move, &cont);
 	mlx_hook(cont.window->mlx_win, 17, 0, close_window, &cont);
 	mlx_loop_hook(cont.window->mlx, draw_julia, &cont);
 	mlx_loop(cont.window->mlx);

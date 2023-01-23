@@ -6,7 +6,7 @@
 /*   By: mabahani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 17:04:02 by mabahani          #+#    #+#             */
-/*   Updated: 2023/01/23 19:10:11 by mabahani         ###   ########.fr       */
+/*   Updated: 2023/01/23 21:33:59 by mabahani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,10 @@ double	atod(char *str);
 void	mandelbrot(t_control	cont);
 void	julia(t_control	cont);
 void	burning_ship(t_control	cont);
+
+int		handle_error_1(char **av);
+int		handle_error_2(char **av);
+void	print_error(int f);
 
 void	ft_putstr_fd(char *s, int fd);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);

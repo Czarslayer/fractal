@@ -6,7 +6,7 @@
 /*   By: mabahani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 17:04:04 by mabahani          #+#    #+#             */
-/*   Updated: 2023/01/23 18:55:23 by mabahani         ###   ########.fr       */
+/*   Updated: 2023/01/23 22:06:38 by mabahani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	draw_burningship(t_control *cont)
 
 void	burning_ship(t_control	cont)
 {
-	mlx_key_hook(cont.window->mlx_win, key_hook, &cont);
+	mlx_hook(cont.window->mlx_win, 2, 0, key_hook, &cont);
 	mlx_mouse_hook(cont.window->mlx_win, mouse_hook, &cont);
 	mlx_hook(cont.window->mlx_win, 17, 0, close_window, &cont);
 	mlx_loop_hook(cont.window->mlx, draw_burningship, &cont);
